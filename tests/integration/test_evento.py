@@ -10,6 +10,7 @@ from src.evento.schema import RespostaEvento
 
 EVENTO_BASE = {
     "nome": "Retiro Teen 2025",
+    "tipo_evento": "Conferência",
     "descricao": "Retiro anual",
     "local_latitude": -15.7801,
     "local_longitude": -47.9292,
@@ -107,6 +108,14 @@ PAYLOADS_EVENTO_INVALIDOS = [
     pytest.param({"nome": "Evento X"}, id="sem_coordenadas_e_datas"),
     pytest.param({**EVENTO_BASE, "local_latitude": "invalido"}, id="latitude_invalida"),
     pytest.param({**EVENTO_BASE, "data_inicio": "data-invalida"}, id="data_invalida"),
+    pytest.param(
+        {k: v for k, v in EVENTO_BASE.items() if k != "tipo_evento"},
+        id="sem_tipo_evento",
+    ),
+    pytest.param(
+        {**EVENTO_BASE, "tipo_evento": "Retiro"},
+        id="tipo_evento_invalido",
+    ),
 ]
 
 

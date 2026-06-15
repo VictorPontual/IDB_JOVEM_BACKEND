@@ -8,6 +8,7 @@ class Evento(Base):
     evento_id            = Column(Integer, primary_key=True, autoincrement=True)
     calendario_evento_id = Column(Text, nullable=True)
     nome                 = Column(Text, nullable=False)
+    tipo_evento          = Column(Text, nullable=True)
     descricao            = Column(Text, nullable=True)
     local_latitude       = Column(Numeric(10, 7), nullable=True)
     local_longitude      = Column(Numeric(10, 7), nullable=True)

@@ -1,11 +1,19 @@
 from datetime import datetime
+from enum import Enum
 from pydantic import BaseModel, field_validator
 
 from src.drive.utils import converter_link_para_proxy
 
 
+class TipoEvento(str, Enum):
+    CONFERENCIA = "Conferência"
+    ACAMPAMENTO = "Acampamento"
+    OUTROS = "Outros"
+
+
 class BaseEvento(BaseModel):
     nome: str
+    tipo_evento: TipoEvento | None = None
     descricao: str | None = None
     local_latitude: float
     local_longitude: float
@@ -20,6 +28,7 @@ class SolicitacaoEvento(BaseEvento):
     Modelo para a solicitação de criação ou atualização de um evento.
     Herda os campos básicos de Baseevento.
     """
+    tipo_evento: TipoEvento
 
 class RespostaEvento(BaseEvento):
     evento_id: int
