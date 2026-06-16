@@ -22,6 +22,11 @@ class RepositorioBandaPalestrante:
             .first()
         )
 
+    def atualizar(self, participante: BandaPalestrante) -> BandaPalestrante:
+        self.db.commit()
+        self.db.refresh(participante)
+        return participante
+
     def deletar(self, participante: BandaPalestrante) -> None:
         self.db.delete(participante)
         self.db.commit()

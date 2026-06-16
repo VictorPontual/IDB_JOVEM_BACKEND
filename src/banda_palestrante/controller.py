@@ -51,6 +51,20 @@ def buscar_banda_palestrante(
         raise HTTPException(status_code=404, detail=str(erro)) from erro
 
 
+@router.put("/{participante_id}", response_model=RespostaBandaPalestrante)
+def atualizar_banda_palestrante(
+    participante_id: int,
+    solicitacao: SolicitacaoBandaPalestrante,
+    servico: ServicoBandaPalestrante = Depends(get_servico),
+    _: dict = Depends(verificar_roles(["admin", "superadmin"])),
+):
+    try:
+        return servico.atualizar_banda_palestrante(participante_id, solicitacao)
+
+    except ValueError as erro:
+        raise HTTPException(status_code=404, detail=str(erro)) from erro
+
+
 @router.delete("/{participante_id}", status_code=204)
 def deletar_banda_palestrante(
     participante_id: int,

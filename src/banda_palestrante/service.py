@@ -23,6 +23,16 @@ class ServicoBandaPalestrante:
 
         return participante
 
+    def atualizar_banda_palestrante(
+        self, participante_id: int, dados: SolicitacaoBandaPalestrante
+    ):
+        participante = self.buscar_banda_palestrante(participante_id)
+
+        for campo, valor in dados.model_dump().items():
+            setattr(participante, campo, valor)
+
+        return self.repositorio.atualizar(participante)
+
     def deletar_banda_palestrante(self, participante_id: int):
         participante = self.buscar_banda_palestrante(participante_id)
         self.repositorio.deletar(participante)
