@@ -8,6 +8,7 @@ from src.drive.utils import converter_link_para_proxy
 class TipoEvento(str, Enum):
     CONFERENCIA = "Conferência"
     ACAMPAMENTO = "Acampamento"
+    CAMPANHA_NACIONAL = "Campanha Nacional"
     OUTROS = "Outros"
 
 
